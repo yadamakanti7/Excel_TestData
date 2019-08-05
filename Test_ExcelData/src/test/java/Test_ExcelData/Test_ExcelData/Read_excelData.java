@@ -28,6 +28,7 @@ public class Read_excelData
 			driver.manage().window().maximize();
 			driver.manage().timeouts().implicitlyWait(9, TimeUnit.SECONDS);
 			driver.findElement(By.xpath("//input[@name='identifier']")).click();
+			System.out.println("Fetching User DATA from properties file");
 			System.out.println(Getdata.getTestData().get("UserName"));
 			driver.findElement(By.xpath("//input[@name='identifier']")).sendKeys(Getdata.getTestData().get("UserName"));
 			driver.findElement(By.xpath("//span[contains(text(),'Next')]")).click();
@@ -44,19 +45,18 @@ public class Read_excelData
 			FileInputStream fis = new FileInputStream(path);
 
 			Workbook workbook = new XSSFWorkbook(fis);
-
 			Sheet sheet = workbook.getSheetAt(0);
 
 			int lastRow = sheet.getLastRowNum();
-			System.out.println("last row "+lastRow);
-
+			
+			System.out.println("Excel Sheet loaded successfully");
 			for(int i=0; i<=lastRow; i++)
 			{
 
 				Row row = sheet.getRow(i);
 				Cell cell = row.getCell(0);
 				String value = cell.getStringCellValue();
-				System.out.println("mail names: "+value);
+			
 
 				driver.findElement(By.xpath("//div[contains(text(),'Compose')]")).click();
 
